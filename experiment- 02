@@ -1,5 +1,5 @@
 import cv2
-image = cv2.imread("sample.jpg") # Replace with your image file
+image = cv2.imread("sample.jpg")
 blurred_image = cv2.GaussianBlur(image, (15, 15), 0) # (15, 15) is the kernel size
 cv2.imshow("Original Image", image)
 cv2.imshow("Blurred Image", blurred_image)
