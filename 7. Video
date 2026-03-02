@@ -1,0 +1,40 @@
+video = "C:/Users/AISHMA GIRI/Downloads/6981614-hd_1920_1080_30fps.mp4"
+
+cap_n = cv2.VideoCapture(video)
+cap_s = cv2.VideoCapture(video)
+cap_f = cv2.VideoCapture(video)
+
+i = 0
+slow_frame = None
+
+while True:
+    ret_n, f_n = cap_n.read()
+    if not ret_n:
+        break
+    f_n = cv2.resize(f_n, (500,300))
+
+    if i % 5 == 0:
+        ret_s, slow_frame = cap_s.read()
+        if not ret_s:
+            break
+        slow_frame = cv2.resize(slow_frame, (500,300))
+    i += 1
+
+    ret_f, f_f = cap_f.read()
+    if not ret_f:
+        break
+    for _ in range(4):
+        cap_f.read()
+    f_f = cv2.resize(f_f, (500,300))
+
+    cv2.imshow("Normal Video", f_n)
+    cv2.imshow("Slow Motion Video", slow_frame)
+    cv2.imshow("Fast Motion Video", f_f)
+
+    if cv2.waitKey(30) & 0xFF == ord('q'):
+        break
+
+cap_n.release()
+cap_s.release()
+cap_f.release()
+cv2.destroyAllWindows()
