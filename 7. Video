@@ -1,3 +1,4 @@
+import cv2
 video = "C:/Users/AISHMA GIRI/Downloads/6981614-hd_1920_1080_30fps.mp4"
 
 cap_n = cv2.VideoCapture(video)
