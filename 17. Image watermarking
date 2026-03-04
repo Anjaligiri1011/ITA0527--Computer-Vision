@@ -1,0 +1,15 @@
+import cv2
+import numpy as np
+img = cv2.imread("C:/Users/AISHMA GIRI/Pictures/taj.jpg")
+watermarked = img.copy()
+text = "ANJALI"
+font = cv2.FONT_HERSHEY_SIMPLEX
+
+cv2.putText(watermarked, text, (50, 50), font, 1, (0, 0, 255), 2, cv2.LINE_AA)
+
+combined = np.hstack((img, watermarked))
+
+cv2.imshow("Input (Left) | Watermarked (Right)", combined)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
