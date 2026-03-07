@@ -1,0 +1,32 @@
+import cv2
+cap = cv2.VideoCapture("C:/Users/AISHMA GIRI/Downloads/23559-335833139_medium.mp4")
+frames = []
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frames.append(frame)
+
+cap.release()
+frames.reverse()
+height, width, layers = frames[0].shape
+
+out = cv2.VideoWriter('reverse_video.avi',
+                      cv2.VideoWriter_fourcc(*'XVID'),
+                      10, (width, height))
+
+# Create adjustable window
+cv2.namedWindow("Reversed Video", cv2.WINDOW_NORMAL)
+
+# Set window size (display size)
+cv2.resizeWindow("Reversed Video", 800, 500)
+
+for frame in frames:
+    out.write(frame)
+    cv2.imshow("Reversed Video", frame)
+
+    if cv2.waitKey(25) & 0xFF == ord('q'):
+        break
+out.release()
+cv2.destroyAllWindows()
