@@ -1,0 +1,21 @@
+import cv2
+import numpy as np
+
+def create_rectangle_image():
+
+    width = int(input("Enter image width: "))
+    height = int(input("Enter image height: "))
+
+    # Create white image
+    img = np.ones((height, width, 3), dtype=np.uint8) * 255
+
+    start_point = (width // 10, height // 10)          
+    end_point = (width - width // 10, height - height // 10)  
+
+    cv2.rectangle(img, start_point, end_point, (0, 0, 255), 3)
+
+    cv2.imshow("Rectangle Image", img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+create_rectangle_image()
