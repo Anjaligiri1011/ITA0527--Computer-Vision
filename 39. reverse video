@@ -1,0 +1,38 @@
+import cv2
+
+def play_video_reverse(video_path="C:/Users/AISHMA GIRI/Downloads/5485_Francisco_San_1920x1080.mp4", delay=100):
+    
+    cap = cv2.VideoCapture(video_path)
+    if not cap.isOpened():
+        print("Error: Cannot open video!")
+        return
+
+    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    print(f"Total frames in video: {total_frames}")
+
+    frames = []
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            break
+        frames.append(frame)
+    cap.release()
+
+    if not frames:
+        print("No frames found in video.")
+        return
+
+    cv2.namedWindow("Reverse Video", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Reverse Video", 960, 540)  # Resize to smaller window for large videos
+
+    for idx, frame in enumerate(reversed(frames)):
+        cv2.imshow("Reverse Video", frame)
+        key = cv2.waitKey(delay) & 0xFF
+        if key == ord('q'):
+            print(f"Stopped at frame {len(frames)-idx}")
+            break
+
+    cv2.destroyAllWindows()
+    print("Video playback finished.")
+
+play_video_reverse()
